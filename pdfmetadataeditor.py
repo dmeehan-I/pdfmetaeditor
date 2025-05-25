@@ -61,24 +61,22 @@ def collect_pdfs_recursively(folder):
     return pdf_files
 
 def browse_folder():
-    folder = filedialog.askdirectory(title="Select Folder with PDFs")
+    folder = filedialog.askdirectory(title="Select Folder Containing PDFs")
     if not folder:
-        print("No folder selected.")
+        return  # User cancelled
+
+    pdf_files = []
+    for root, _, files in os.walk(folder):
+        for file in files:
+            if file.lower().endswith(".pdf"):
+                pdf_files.append(os.path.join(root, file))
+
+    if not pdf_files:
+        messagebox.showinfo("No PDFs Found", "No PDF files were found in that folder.\nPlease select another folder.")
+        browse_folder()  # 🔁 Try again
         return
 
-    print(f"Selected folder: {folder}")
-    
-    global pdf_data
-    pdf_data = collect_pdfs_recursively(folder)
-    
-    print(f"Found {len(pdf_data)} PDF(s).")
-    for entry in pdf_data:
-        print(f"- {entry['filename']} | From: {entry['path']}")
-    
-    if not pdf_data:
-        messagebox.showinfo("No PDFs Found", "No PDF files were found in the selected folder or its subfolders.")
-        return
-
+    pdf_data = extract_metadata(pdf_files)
     show_results(pdf_data, folder)
 
 def fix_all_metadata(tree):
