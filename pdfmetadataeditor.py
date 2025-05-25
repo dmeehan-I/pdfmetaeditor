@@ -76,7 +76,7 @@ def browse_folder():
         browse_folder()  # 🔁 Try again
         return
 
-    pdf_data = extract_metadata(pdf_files)
+    pdf_data = collect_pdfs_recursively(folder)
     show_results(pdf_data, folder)
 
 def fix_all_metadata(tree):
