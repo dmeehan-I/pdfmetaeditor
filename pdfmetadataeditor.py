@@ -114,7 +114,13 @@ def show_results(data, folder):
     tree.configure(yscrollcommand=vsb.set)
     vsb.pack(side="right", fill="y")
     tree.pack(expand=True, fill="both", side="left")
-
+    
+    def swap_fn_title_author():
+        for item in tree.selection():
+            values = list(tree.item(item)["values"])
+            values[0], values[1] = values[1], values[0]
+            tree.item(item, values=values)
+            
     # Insert data
     for entry in data:
         row = (entry["fn_title"], entry["fn_author"], entry["meta_title"], entry["meta_author"])
@@ -183,6 +189,9 @@ def show_results(data, folder):
 
     fix_btn = tk.Button(btn_frame, text="Fix Selected Metadata", command=fix_selected_metadata)
     fix_btn.pack(side="left", padx=10)
+    
+    swap_btn = tk.Button(btn_frame, text="Swap Filename Title/Author", command=swap_fn_title_author)
+    swap_btn.pack(side="left", padx=10)
 
     reload_btn = tk.Button(btn_frame, text="Select Another Folder", command=select_another)
     reload_btn.pack(side="left", padx=10)
