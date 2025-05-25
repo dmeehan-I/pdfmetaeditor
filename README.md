@@ -26,6 +26,6 @@ Requirements:
 - PyPDF2
 
 Install with:
-  '''bash
+  ```bash
   pip install PyPDF2
 
