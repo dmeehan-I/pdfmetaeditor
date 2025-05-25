@@ -21,11 +21,11 @@ Bulk-edit PDF metadata based on file names.
 
 4. Apply changes to selected PDFs
 
-Requirements
-Python 3.7+
-
-PyPDF2
+Requirements:
+- Python 3.7+
+- PyPDF2
 
 Install with:
+  '''bash
   pip install PyPDF2
 
