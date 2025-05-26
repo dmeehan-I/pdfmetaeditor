@@ -4,6 +4,7 @@ import sys
 import tkinter as tk
 from tkinter import filedialog, ttk, messagebox
 from pypdf import PdfReader, PdfWriter
+from PyPDF2.generic import NameObject, createStringObject
 
 def extract_metadata_from_filename(filename):
     match = re.match(r"(.+?) - (.+?)\.pdf$", filename)
@@ -23,17 +24,24 @@ def update_pdf_metadata(path, title, author):
     try:
         reader = PdfReader(path)
         writer = PdfWriter()
-        writer.append_pages_from_reader(reader)
+
+        for page in reader.pages:
+            writer.add_page(page)
 
         writer.add_metadata({
             "/Title": title,
             "/Author": author
         })
 
+        # Try rewriting without references (cleaning up)
+        writer._root_object.update({
+            NameObject("/Pages"): writer._pages
+        })
+
         temp_path = path + ".temp.pdf"
         with open(temp_path, "wb") as f:
             writer.write(f)
-        
+
         os.replace(temp_path, path)
         return True
     except Exception as e:
@@ -48,7 +56,7 @@ def collect_pdfs_recursively(folder):
             if f.lower().endswith(".pdf"):
                 full_path = os.path.join(root, f)
                 print(f"Found PDF: {full_path}")
-                fn_title, fn_author = extract_metadata_from_filename(f)
+                fn_author, fn_title = extract_metadata_from_filename(f)
                 meta_title, meta_author = extract_metadata_from_pdf(full_path)
                 pdf_files.append({
                     "path": full_path,
