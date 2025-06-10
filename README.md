@@ -1,55 +1,55 @@
 # pdfmetadataeditor
 
-Bulk-edit PDF metadata based on file names with a fast, user-friendly GUI.
+A utility for bulk-editing PDF metadata using filenames.
 
 ## Features
 
 ### Core Functionality
-- **Recursive folder scanning** - Process PDFs in selected folders and all subfolders
-- **Smart filename parsing** - Extract title and author from `Author - Title.pdf` format
-- **Fallback handling** - Use full filename as title when format doesn't match
-- **Metadata comparison** - Side-by-side view of filename vs. current PDF metadata
-- **Interactive editing** - Double-click cells to manually edit title/author fields
-- **Selective updates** - Choose which files to update with batch processing
+- **Recursive Folder Scanning:** Processes PDF files within selected directories and their subfolders.
+- **Filename Parsing:** Extracts title and author from `Author - Title.pdf` filename format.
+- **Fallback Naming:** Uses the full filename as the title if it doesn't match the standard format.
+- **Metadata Comparison:** Displays a side-by-side view of filename-derived information versus existing PDF metadata.
+- **Interactive Editing:** Allows manual modification of title and author fields directly in the interface.
+- **Selective Updates:** Provides options to update metadata for specific, chosen files in a batch.
 
 ### Performance Optimizations
-- **Multithreaded processing** - Parallel PDF metadata reading for faster scanning
-- **Progress tracking** - Real-time progress bars during long operations
-- **Intelligent caching** - Avoid re-reading unchanged PDF files
-- **Batch operations** - Efficient bulk metadata updates
-- **Responsive UI** - Non-blocking interface that stays responsive during processing
+- **Multithreaded Processing:** Utilizes parallel operations for faster PDF metadata reading.
+- **Progress Tracking:** Shows real-time progress during operations.
+- **Intelligent Caching:** Avoids redundant PDF file reads for unchanged files.
+- **Batch Operations:** Efficiently updates metadata for multiple files.
+- **Responsive Interface:** The application remains usable during processing tasks.
 
 ### User Experience
-- **Visual mismatch highlighting** - Files with different filename/metadata shown in red
-- **Multiple folder support** - Process several directories in one session
-- **Auto-refresh** - Automatically rescan and update display after changes
-- **Title/Author swapping** - Quick button to swap title and author fields
-- **Comprehensive statistics** - Shows file counts and mismatch numbers
+- **Mismatch Identification:** Clearly highlights files where filename information differs from embedded metadata.
+- **Multiple Folder Processing:** Supports processing PDFs from several directories in one session.
+- **Automatic Refresh:** The display updates automatically after changes are applied.
+- **Title/Author Swap:** Includes a quick option to interchange title and author fields.
+- **Summary Statistics:** Displays total file counts and the number of mismatched entries.
 
 ## Usage
 
-1. **Install dependencies:**
-   ```bash
-   pip install pypdf PyPDF2
-   ```
+1.  **Install dependencies:**
+    ```bash
+    pip install pypdf PyPDF2
+    ```
 
-2. **Run the script:**
-   ```bash
-   python pdfmetadataeditor.py
-   ```
+2.  **Run the script:**
+    ```bash
+    python pdfmetadataeditor.py
+    ```
 
-3. **Select folders** containing PDFs when prompted (you can add multiple folders)
+3.  **Select folders** containing PDFs when prompted (you can add multiple folders).
 
-4. **Review the comparison table:**
-   - Red-highlighted rows show mismatched metadata
-   - Double-click filename title/author cells to edit
-   - Use "Swap Title/Author" for files with reversed information
+4.  **Review the comparison table:**
+    * Rows with mismatched metadata are highlighted.
+    * Double-click filename title/author cells to edit.
+    * Use "Swap Title/Author" for files with reversed information.
 
-5. **Apply updates:**
-   - Select specific files and click "Fix Selected Metadata"
-   - Or use "Fix All Mismatched" to update all problematic files at once
+5.  **Apply updates:**
+    * Select specific files and click "Fix Selected Metadata."
+    * Alternatively, use "Fix All Mismatched" to update all identified problematic files.
 
-6. **Auto-refresh** - The table automatically updates to show your changes
+6.  **Automatic Updates:** The table automatically updates to show your changes.
 
 ## Filename Format Examples
 
@@ -59,14 +59,14 @@ Bulk-edit PDF metadata based on file names with a fast, user-friendly GUI.
 | `ComplexDocument_v2.pdf` | *(empty)* | ComplexDocument_v2 |
 | `J.K. Rowling - Harry Potter.pdf` | J.K. Rowling | Harry Potter |
 
-Files that don't match the `Author - Title.pdf` pattern will show the full filename (minus extension) as the title, allowing for manual editing.
+Files that do not match the `Author - Title.pdf` pattern will use the full filename (excluding the extension) as the title, which can then be manually edited.
 
 ## Requirements
 
-- **Python 3.7+**
-- **pypdf** - Modern PDF processing library
-- **PyPDF2** - Additional PDF utilities
-- **tkinter** - GUI framework (usually included with Python)
+-   **Python 3.7+**
+-   **pypdf** - For modern PDF processing.
+-   **PyPDF2** - For additional PDF utilities.
+-   **tkinter** - Python's standard GUI framework (typically included with Python).
 
 ## Installation
 
